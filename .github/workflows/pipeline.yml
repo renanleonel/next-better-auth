@@ -1,0 +1,43 @@
+name: pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  main:
+    name: main
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: using node version ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: install dependencies
+        run: pnpm install
+
+      - name: lint with eslint
+        run: pnpm lint
+
+      - name: lint with prettier
+        run: pnpm prettier:check
+
+      - name: run tests with jest
+        run: pnpm test
+
+      - name: build project
+        run: pnpm build
