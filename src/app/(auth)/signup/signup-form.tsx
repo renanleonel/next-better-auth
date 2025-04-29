@@ -1,20 +1,20 @@
-'use client';
-import { Button } from '@/components/ui/button';
+'use client'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ActionState } from '@/lib/action-helpers';
-import { authClient } from '@/lib/auth-client';
-import { cn } from '@/lib/utils';
-import Link from 'next/link';
-import { useActionState } from 'react';
-import { signUpEmail } from '../actions';
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { authClient } from '@/lib/auth-client'
+import { cn } from '@/lib/utils'
+import { ActionState } from '@/lib/utils/parsed-action'
+import Link from 'next/link'
+import { useActionState } from 'react'
+import { signUpEmail } from '../../../lib/actions'
 
 export function SignUpForm({
   className,
@@ -25,7 +25,7 @@ export function SignUpForm({
     {
       error: '',
     }
-  );
+  )
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
@@ -80,7 +80,7 @@ export function SignUpForm({
                   onClick={async () => {
                     await authClient.signIn.social({
                       provider: 'github',
-                    });
+                    })
                   }}
                   variant='outline'
                   className='w-full'
@@ -102,5 +102,5 @@ export function SignUpForm({
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

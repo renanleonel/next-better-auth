@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { authClient } from '@/lib/auth-client';
-import { redirect } from 'next/navigation';
-import { Button } from './ui/button';
+import { authClient } from '@/lib/auth-client'
+import { redirect } from 'next/navigation'
+import { Button } from './ui/button'
 
 export const LogoutButton = () => {
   return (
@@ -11,13 +11,13 @@ export const LogoutButton = () => {
         await authClient.signOut({
           fetchOptions: {
             onSuccess: () => {
-              redirect('/login');
+              redirect('/login')
             },
           },
-        });
+        })
       }}
     >
       logout
     </Button>
-  );
-};
+  )
+}

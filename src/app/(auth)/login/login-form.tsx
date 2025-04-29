@@ -1,13 +1,13 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ActionState } from '@/lib/action-helpers';
-import { cn } from '@/lib/utils';
-import Link from 'next/link';
-import { useActionState } from 'react';
-import { loginEmail } from '../actions';
+'use client'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
+import { ActionState } from '@/lib/utils/parsed-action'
+import Link from 'next/link'
+import { useActionState } from 'react'
+import { loginEmail } from '../../../lib/actions'
 
 export function LoginForm({
   className,
@@ -18,7 +18,7 @@ export function LoginForm({
     {
       error: '',
     }
-  );
+  )
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
@@ -64,5 +64,5 @@ export function LoginForm({
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
