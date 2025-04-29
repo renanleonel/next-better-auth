@@ -3,22 +3,33 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { loginEmail } from '@/lib/actions'
 import { cn } from '@/lib/utils'
 import { ActionState } from '@/lib/utils/parsed-action'
 import Link from 'next/link'
 import { useActionState } from 'react'
-import { loginEmail } from '../../../lib/actions'
+import { toast } from 'sonner'
+
+const defaultValues = {
+  error: '',
+  email: '',
+} as const
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
-    loginEmail,
-    {
-      error: '',
-    }
+    async (_, formData) => {
+      const { data, error } = await loginEmail(_, formData)
+
+      if (error.statusCode === 401) toast.error('aa')
+
+      return data
+    },
+    defaultValues
   )
+
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>

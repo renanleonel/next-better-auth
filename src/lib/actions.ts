@@ -3,6 +3,7 @@
 import { auth } from '@/lib/auth'
 import { LoginSchema, SignUpSchema } from '@/lib/types'
 
+import { APIError } from 'better-auth/api'
 import { redirect } from 'next/navigation'
 import { parsedAction } from './utils/parsed-action'
 
@@ -23,9 +24,16 @@ export const signUpEmail = parsedAction(SignUpSchema, async (data) => {
 export const loginEmail = parsedAction(LoginSchema, async (data) => {
   const { email, password } = data
 
-  await auth.api.signInEmail({
-    body: { email, password },
-  })
+  try {
+    await auth.api.signInEmail({ body: { email, password } })
+  } catch (error) {
+    if (error instanceof APIError) {
+      return {
+        data,
+        error: { ...error },
+      }
+    }
+  }
 
   redirect('/home')
 })

@@ -10,3 +10,11 @@ export const LoginSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 })
+
+export type APIErrorResponse = {
+  message: string
+  statusCode: number
+  status: string
+  body: any
+  headers: Record<string, string>
+}

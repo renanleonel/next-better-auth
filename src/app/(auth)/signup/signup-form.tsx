@@ -9,12 +9,12 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { signUpEmail } from '@/lib/actions'
 import { authClient } from '@/lib/auth-client'
 import { cn } from '@/lib/utils'
 import { ActionState } from '@/lib/utils/parsed-action'
 import Link from 'next/link'
 import { useActionState } from 'react'
-import { signUpEmail } from '../../../lib/actions'
 
 export function SignUpForm({
   className,
