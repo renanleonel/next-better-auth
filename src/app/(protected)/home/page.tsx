@@ -1,16 +1,15 @@
 import { LogoutButton } from '@/components/logout-button'
 import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
-import { redirect } from 'next/navigation'
 
-export default async function Page() {
+export default async function Home() {
   const session = await auth.api.getSession({
     headers: await headers(),
   })
 
-  if (!session) redirect('/login')
+  if (!session) return
 
-  const user = session.user
+  const { user } = session
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center gap-2'>

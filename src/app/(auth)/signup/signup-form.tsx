@@ -24,9 +24,7 @@ export function SignUpForm({
 
       return data
     },
-    {
-      error: '',
-    }
+    defaultValues
   )
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
