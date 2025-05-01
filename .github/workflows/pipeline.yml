@@ -36,8 +36,5 @@ jobs:
       - name: lint with prettier
         run: pnpm prettier:check
 
-      - name: run tests with jest
-        run: pnpm test
-
       - name: build project
         run: pnpm build

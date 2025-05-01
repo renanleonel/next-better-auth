@@ -33,8 +33,13 @@ NEXTAUTH_SECRET="your-secret-key"
 NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
 ```
+4. Generate secret:
 
-4. Run database migrations:
+```bash
+npx @better-auth/cli@latest secret
+```
+
+5. Run database migrations:
 
 ```bash
 pnpm drizzle-kit generate
@@ -44,7 +49,7 @@ pnpm drizzle-kit generate
 pnpm drizzle-kit migrate
 ```
 
-5. Start the development server:
+6. Start the development server:
 
 ```bash
 pnpm dev
