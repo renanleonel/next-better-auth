@@ -42,3 +42,4 @@ next-env.d.ts
 .swc
 
 better-auth_migrations
+drizzle
