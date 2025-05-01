@@ -1,27 +1,29 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { signUpEmail } from '@/lib/actions'
-import { authClient } from '@/lib/auth-client'
 import { cn } from '@/lib/utils'
 import { ActionState } from '@/lib/utils/parsed-action'
 import Link from 'next/link'
 import { useActionState } from 'react'
+import { toast } from 'sonner'
+
+const defaultValues = { error: '' } as const
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
-    signUpEmail,
+    async (_, formData) => {
+      const { data, error } = await signUpEmail(_, formData)
+
+      if (error.statusCode === 422) toast.error('User already exists!')
+
+      return data
+    },
     {
       error: '',
     }
@@ -29,12 +31,6 @@ export function SignUpForm({
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
-        <CardHeader>
-          <CardTitle>Sign up for an account</CardTitle>
-          <CardDescription>
-            Enter your email below to sign up for an account
-          </CardDescription>
-        </CardHeader>
         <CardContent>
           <form action={formAction}>
             <div className='flex flex-col gap-6'>
@@ -72,23 +68,9 @@ export function SignUpForm({
                   defaultValue={state.password}
                 />
               </div>
-              <div className='flex flex-col gap-3'>
-                <Button type='submit' className='w-full' disabled={pending}>
-                  Sign up
-                </Button>
-                <Button
-                  onClick={async () => {
-                    await authClient.signIn.social({
-                      provider: 'github',
-                    })
-                  }}
-                  variant='outline'
-                  className='w-full'
-                  type='button'
-                >
-                  Sign in with GitHub
-                </Button>
-              </div>
+              <Button type='submit' className='w-full' disabled={pending}>
+                Sign up
+              </Button>
             </div>
             <div className='text-sm text-red-500'></div>
 

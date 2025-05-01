@@ -10,13 +10,22 @@ import { parsedAction } from './utils/parsed-action'
 export const signUpEmail = parsedAction(SignUpSchema, async (data) => {
   const { email, password, name } = data
 
-  await auth.api.signUpEmail({
-    body: {
-      email,
-      password,
-      name,
-    },
-  })
+  try {
+    await auth.api.signUpEmail({
+      body: {
+        email,
+        password,
+        name,
+      },
+    })
+  } catch (error) {
+    if (error instanceof APIError) {
+      return {
+        data,
+        error: { ...error },
+      }
+    }
+  }
 
   redirect('/home')
 })

@@ -13,8 +13,8 @@ export default async function Page() {
   const user = session.user
 
   return (
-    <div>
-      <div>authenticated: {user.name}</div>
+    <div className='flex min-h-screen flex-col items-center justify-center gap-2'>
+      <p className='text-white'>User: {user.name}</p>
       <LogoutButton />
     </div>
   )

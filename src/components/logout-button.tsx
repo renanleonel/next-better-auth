@@ -7,6 +7,7 @@ import { Button } from './ui/button'
 export const LogoutButton = () => {
   return (
     <Button
+      className='cursor-pointer'
       onClick={async () => {
         await authClient.signOut({
           fetchOptions: {

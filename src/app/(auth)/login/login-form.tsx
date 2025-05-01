@@ -10,10 +10,7 @@ import Link from 'next/link'
 import { useActionState } from 'react'
 import { toast } from 'sonner'
 
-const defaultValues = {
-  error: '',
-  email: '',
-} as const
+const defaultValues = { error: '' } as const
 
 export function LoginForm({
   className,
@@ -23,7 +20,8 @@ export function LoginForm({
     async (_, formData) => {
       const { data, error } = await loginEmail(_, formData)
 
-      if (error.statusCode === 401) toast.error('aa')
+      if (error.statusCode === 401)
+        toast.error('E-mail / password combination error')
 
       return data
     },
