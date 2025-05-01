@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js with Better Auth
+
+A minimal setup for using [Better Auth](https://www.better-auth.com) authentication in Next.js. This project implements email and password authentication using Drizzle ORM and PostgreSQL.
+
+## Features
+
+- Email and password authentication with Better Auth
+- PostgreSQL database with Drizzle ORM
+- Next.js 15 with App Router
+- Tailwind CSS for styling
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone <your-repo-url>
+cd next-better-auth
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Set up your environment variables:
+   Create a `.env` file in the root directory with the following variables:
+
+```env
+APP_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+```
+
+4. Run database migrations:
+
+```bash
+pnpm drizzle-kit generate
+```
+
+```bash
+pnpm drizzle-kit migrate
+```
+
+5. Start the development server:
+
+```bash
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Authentication Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project implements the following authentication features:
 
-## Learn More
+- Email and password sign up
+- Email and password sign in
+- Protected routes
+- Session management
 
-To learn more about Next.js, take a look at the following resources:
+## Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project uses Drizzle ORM with the following main tables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `users` - User information
+- `accounts` - Authentication accounts
+- `sessions` - User sessions
+- `verification_tokens` - Email verification tokens
 
-## Deploy on Vercel
+## Useful Links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Better Auth Documentation](https://www.better-auth.com/docs/introduction)
+- [Drizzle Adapter Documentation](https://www.better-auth.com/docs/adapters/drizzle)
+- [Email & Password Authentication](https://www.better-auth.com/docs/authentication/email-password)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Drizzle ORM Documentation](https://orm.drizzle.team)
